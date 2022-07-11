@@ -1,13 +1,23 @@
-<div class="container">
+
+<div class="body">
+
   <div class="login">
-    <div class="login-triangle"></div>
+    <img [src]="logo" alt="" width="50%" height="80%">
+    <h1 class="h3 mb-3 fw-normal">Login</h1>
 
-    <h2 class="login-header">Log in</h2>
-
-    <form #frmLogin="ngForm" class="login-container" (ngSubmit)="onLogin(frmLogin)">
-      <p><input type="email" name="email" placeholder="Email" ngModel required=""></p>
-      <p><input type="password" name="password" placeholder="Password" ngModel required=""></p>
-      <p><input type="submit" value="Log in" [value]="'send'"></p>
+    <!--<form #frmLogin="ngForm" (ngSubmit)="onLogin(frmLogin)">-->
+      <form [formGroup]="form" (ngSubmit)="onLogin()">
+      <mat-form-field class="ancho" appearance="fill">
+        <mat-label>Usuario</mat-label>
+        <input matInput name="email" formControlName="email">
+      </mat-form-field>
+      <mat-form-field class="ancho" appearance="fill">
+        <mat-label>Contraseña</mat-label>
+        <input matInput name="password" formControlName="password" type="password">
+      </mat-form-field>
+      <br>
+      <button class="ancho" mat-raised-button mat-button color="primary" type="submit" [disabled]="form.invalid">Enviar</button>
     </form>
+
   </div>
 </div>

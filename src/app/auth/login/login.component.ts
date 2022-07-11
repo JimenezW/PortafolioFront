@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
 import { UserI } from "../../models/user";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -9,15 +11,38 @@ import { UserI } from "../../models/user";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  logo = 'https://upload.wikimedia.org/wikipedia/commons/5/50/User_icon-cp.svg';
 
-  constructor(private _authService : AuthService, private _router : Router) { }
+  form:FormGroup;
+
+
+  constructor(
+    private _authService : AuthService, 
+    private _router : Router,
+    private _fb:FormBuilder,
+    private _snackBar: MatSnackBar) {
+
+      this.form = this._fb.group({
+        email:['',Validators.required],
+        password:['',Validators.required]
+      });
+
+     }
 
   ngOnInit(): void {
   }
 
-  onLogin(form:any):void{
-    this._authService.login(form.value).subscribe(res=>{
-      this._router.navigateByUrl('/auth');
+  onLogin():void{
+    this._authService.login(this.form.value).subscribe(res=>{
+      debugger
+      if(res.ok || res.ok === undefined){
+        this._router.navigateByUrl('/dashboard');
+      }else{
+        this._snackBar.open(res.error.message, '', {
+          horizontalPosition: 'end',
+          verticalPosition: 'top',duration:5*1000
+        });
+      }
     });
   }
 

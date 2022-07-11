@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { JwtResponseI } from "../models/jwt-response";
+import { ErrorResponseI } from "../models/error-response";
 import { UserI } from "../models/user";
-import { tap } from "rxjs/operators";
-import { Observable, BehaviorSubject } from "rxjs";
+import { catchError, tap } from "rxjs/operators";
+import { Observable, BehaviorSubject, of } from "rxjs";
+import { CookieService } from 'ngx-cookie-service';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +14,8 @@ export class AuthService {
   autSubject = new BehaviorSubject(false);
   private token: string = "";
 
-  constructor(private _http:HttpClient) { }
+  constructor(private _http:HttpClient,
+    private _cookie : CookieService) { }
 
   register(user:UserI):Observable<JwtResponseI>{
     return this._http.post<JwtResponseI>(`${this.AUTH_SERVER}/register`,user).pipe(tap((res:JwtResponseI)=>{
@@ -28,10 +31,11 @@ export class AuthService {
     return this._http.post<JwtResponseI>(`${this.AUTH_SERVER}/login`,user).pipe(tap((res:JwtResponseI)=>{
       if(res){
         //guardar token
-        debugger
         this.saveToken(res.dataUser.accessToken,res.dataUser.expireIn);
 
       }
+    }),catchError((err)=>{
+      return of(err);
     })
     );
   }
@@ -44,13 +48,19 @@ export class AuthService {
 
   private saveToken(token:string, expiresIn:string):void{
     this.token=token;
-    localStorage.setItem('ACCESS_TOKEN',token);
-    localStorage.setItem('EXPIRES_IN',expiresIn);
+
+    let expireInTem : number = +expiresIn
+
+    let dateExpire = new Date();
+    
+    dateExpire.setSeconds(expireInTem);
+
+    this._cookie.set('access_token',token,dateExpire,'/')
   }
 
   private getToken():string{
     if(!this.token)
-    this.token = localStorage.getItem('ACCESS_TOKEN') as string;
+    this._cookie.get('access_token');
     
     return this.token;
   }

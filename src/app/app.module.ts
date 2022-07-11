@@ -1,24 +1,27 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
-//import { LoginComponent } from './auth/login/login.component';
-//import { RegisterComponent } from './auth/register/register.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from "./MaterialModule";
+import { CookieService } from 'ngx-cookie-service';
+import { observable } from "rxjs";
 @NgModule({
   declarations: [
-    AppComponent,
-//    LoginComponent,
-  //  RegisterComponent
+    AppComponent
   ],
+  //entryComponents:[LoginComponent],
   imports: [
     BrowserModule,
     RouterModule,
-    AppRoutingModule
+    MaterialModule,
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  exports:[],
+  providers: [CookieService],
+  bootstrap: [AppComponent],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
