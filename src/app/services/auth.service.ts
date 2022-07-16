@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { JwtResponseI } from "../models/jwt-response";
-import { ErrorResponseI } from "../models/error-response";
 import { UserI } from "../models/user";
 import { catchError, tap } from "rxjs/operators";
 import { Observable, BehaviorSubject, of } from "rxjs";
 import { CookieService } from 'ngx-cookie-service';
+import { ApiSetting } from '../app-settings-api'
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  AUTH_SERVER: string = 'http://localhost:3000';
+  AUTH_SERVER: string = ApiSetting.ApiAuth;
   autSubject = new BehaviorSubject(false);
   private token: string = "";
 

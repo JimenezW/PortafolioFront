@@ -1,0 +1,31 @@
+<div class="container">
+
+
+    <mat-toolbar>
+        <span>Catalogos</span>
+    </mat-toolbar>
+
+    <mat-card class="cards-forms">
+        <mat-card-title>Prueba</mat-card-title>
+        <mat-card-content>
+            <div class="container">
+                <form [formGroup]="formCat">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Catalogo key</mat-label>
+                        <input matInput placeholder="" formControlName="catKey">
+                        <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput placeholder="" formControlName="name">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Abreviatura</mat-label>
+                        <input matInput placeholder="" formControlName="abbreviate">
+                    </mat-form-field>
+                </form>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+</div>

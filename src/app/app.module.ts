@@ -9,7 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { observable } from "rxjs";
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   //entryComponents:[LoginComponent],
   imports: [

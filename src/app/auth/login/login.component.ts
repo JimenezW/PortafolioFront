@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
 
   onLogin():void{
     this._authService.login(this.form.value).subscribe(res=>{
-      debugger
+      
       if(res.ok || res.ok === undefined){
         this._router.navigateByUrl('/dashboard');
       }else{
