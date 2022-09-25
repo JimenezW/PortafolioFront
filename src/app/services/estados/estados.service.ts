@@ -9,13 +9,13 @@ import { Observable, BehaviorSubject, of } from "rxjs";
   providedIn: 'root'
 })
 export class EstadosService {
-  AUTH_SERVER: string = ApiSetting.Api;
+ 
   constructor(private _http:HttpClient) {
 
    }
 
-   get():Observable<EstadosI>{
-    return this._http.get<EstadosI>(`${this.AUTH_SERVER}/api/Estado`).pipe(tap((res:EstadosI)=>{
+   get():Observable<EstadosI[]>{
+    return this._http.get<EstadosI[]>(`/api/Estado`).pipe(tap((res:EstadosI[])=>{
     }),catchError((err)=>{
       return of(err);
     })

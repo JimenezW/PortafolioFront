@@ -11,7 +11,8 @@ import { ApiSetting } from '../app-settings-api'
   providedIn: 'root'
 })
 export class AuthService {
-  AUTH_SERVER: string = ApiSetting.ApiAuth;
+  //AUTH_SERVER: string = ApiSetting.ApiAuth;
+  AUTH_SERVER: string = ApiSetting.Api;
   autSubject = new BehaviorSubject(false);
   private token: string = "";
 
@@ -22,17 +23,18 @@ export class AuthService {
     return this._http.post<JwtResponseI>(`${this.AUTH_SERVER}/register`,user).pipe(tap((res:JwtResponseI)=>{
       if(res){
         //guardar token
-        this.saveToken(res.dataUser.accessToken,res.dataUser.expireIn);
+        this.saveToken(res.token,res.expireAt);
       }
     })
     );
   }
 
   login(user:UserI):Observable<JwtResponseI>{
-    return this._http.post<JwtResponseI>(`${this.AUTH_SERVER}/login`,user).pipe(tap((res:JwtResponseI)=>{
+    return this._http.post<JwtResponseI>(`/api/login`,user).pipe(tap((res:JwtResponseI)=>{
+      
       if(res){
         //guardar token
-        this.saveToken(res.dataUser.accessToken,res.dataUser.expireIn);
+        this.saveToken(res.token,res.expireAt);
 
       }
     }),catchError((err)=>{

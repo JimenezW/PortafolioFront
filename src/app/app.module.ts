@@ -5,11 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from "./MaterialModule";
-import { CookieService } from 'ngx-cookie-service';
-import { observable } from "rxjs";
+import { SpinnerComponent } from './spinner/spinner.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorService } from './services/spinner/interceptor.service';
+
 @NgModule({
   declarations: [
     AppComponent,
+    SpinnerComponent,
   ],
   //entryComponents:[LoginComponent],
   imports: [
@@ -17,10 +20,11 @@ import { observable } from "rxjs";
     RouterModule,
     MaterialModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   exports:[],
-  providers: [CookieService],
+  providers: [],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })

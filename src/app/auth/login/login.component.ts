@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     private _snackBar: MatSnackBar) {
 
       this.form = this._fb.group({
-        email:['',Validators.required],
+        username:['',Validators.required],
         password:['',Validators.required]
       });
 
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   onLogin():void{
     this._authService.login(this.form.value).subscribe(res=>{
       
-      if(res.ok || res.ok === undefined){
+      if(res.token != undefined && res.token  != null && res.token != ''){
         this._router.navigateByUrl('/dashboard');
       }else{
         this._snackBar.open(res.error.message, '', {

@@ -10,7 +10,8 @@ import { ReportsComponent } from "../reports/reports.component";
 import { CatalogsComponent } from '../catalogs/catalogs.component'
 import { ReactiveFormsModule } from '@angular/forms';
 import { EstadosService } from '../../services/estados/estados.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorService } from 'src/app/services/spinner/interceptor.service';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -26,6 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     ReactiveFormsModule
   ],
-  providers:[EstadosService]
+  providers:[EstadosService,
+    {provide:HTTP_INTERCEPTORS, useClass : InterceptorService, multi : true}
+  ]
 })
 export class DashboardModule { }
