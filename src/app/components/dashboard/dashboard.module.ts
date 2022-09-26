@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EstadosService } from '../../services/estados/estados.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from 'src/app/services/spinner/interceptor.service';
+import { ProvidesModule } from 'src/app/ProvidesMo';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -25,10 +26,9 @@ import { InterceptorService } from 'src/app/services/spinner/interceptor.service
     DashboardRoutingModule,
     HttpClientModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ProvidesModule.forRoot()
   ],
-  providers:[EstadosService,
-    {provide:HTTP_INTERCEPTORS, useClass : InterceptorService, multi : true}
-  ]
+  providers:[EstadosService]
 })
 export class DashboardModule { }

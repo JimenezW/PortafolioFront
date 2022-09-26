@@ -14,7 +14,7 @@ export class InterceptorService implements HttpInterceptor{
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         this.spinnerService.isLoading.next(true);
-        
+        console.log('Hola interceptor')
         return next.handle(req).pipe(
             finalize(()=> this.spinnerService.isLoading.next(false))
         );

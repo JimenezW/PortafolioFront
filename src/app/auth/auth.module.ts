@@ -8,6 +8,7 @@ import { AuthRoutingModule } from "./auth-ruting.module";
 import { AuthService } from "../services/auth.service";
 import { MaterialModule } from "../MaterialModule";
 import { InterceptorService } from '../services/spinner/interceptor.service';
+import { ProvidesModule } from '../ProvidesMo';
 @NgModule({
   declarations: [LoginComponent, RegisterComponent],
   imports: [
@@ -17,10 +18,8 @@ import { InterceptorService } from '../services/spinner/interceptor.service';
     AuthRoutingModule,
     HttpClientModule,
     MaterialModule,
-    
+    ProvidesModule.forRoot()
   ],
-  //exports:[MaterialModule],
-  providers:[AuthService,
-    {provide:HTTP_INTERCEPTORS, useClass : InterceptorService, multi : false}]
+  providers:[AuthService ]
 })
 export class AuthModule { }
