@@ -6,11 +6,16 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from "./MaterialModule";
 import { SpinnerComponent } from './spinner/spinner.component';
+import { NavbarComponent } from './components/dashboard/navbar/navbar.component';
+import { BodyComponent } from './components/dashboard/body/body.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    NavbarComponent,
     SpinnerComponent,
+    BodyComponent
   ],
   //entryComponents:[LoginComponent],
   imports: [
@@ -20,7 +25,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  exports:[],
+  exports:[NavbarComponent, BodyComponent],
   providers: [
     //{provide:HTTP_INTERCEPTORS, useClass : InterceptorService}
   ],

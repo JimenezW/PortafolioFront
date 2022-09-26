@@ -1,2 +1,6 @@
-<router-outlet></router-outlet>
-<app-spinner>sipiner</app-spinner>
+<app-navbar (onToggleSideNav)="onToggleSideNav($event)"></app-navbar>
+<app-body
+[collapsed]="isSideNavCollapsed"
+[screenWidth]="screenWidth"
+></app-body>
+<app-spinner></app-spinner>
