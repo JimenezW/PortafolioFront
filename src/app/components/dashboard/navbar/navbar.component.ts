@@ -40,7 +40,7 @@ interface SideNavToggle {
 })
 
 export class NavbarComponent implements OnInit {
-  collapsed = true;
+  collapsed = false;
   navData = navbarData
 
   @Output() onToggleSideNav : EventEmitter<SideNavToggle> = new EventEmitter();

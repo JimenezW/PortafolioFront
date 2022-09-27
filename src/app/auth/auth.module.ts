@@ -15,7 +15,7 @@ import { ProvidesModule } from '../ProvidesMo';
     FormsModule,
     ReactiveFormsModule,
     AuthRoutingModule,
-    HttpClientModule,
+    //HttpClientModule,
     MaterialModule,
     ProvidesModule.forRoot()
   ],

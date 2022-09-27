@@ -45,20 +45,20 @@ export class AuthService {
 
   logout(){
     this.token='';
-    localStorage.removeItem('ACCESS_TOKEN');
-    localStorage.removeItem('EXPIRES_IN');
+    localStorage.clear();
   }
 
   private saveToken(token:string, expiresIn:string):void{
     this.token=token;
 
-    let expireInTem : number = +expiresIn
+    //let expireInTem : number = +expiresIn
 
-    let dateExpire = new Date();
+    let dateExpire = new Date(expiresIn).setHours(-24);
     
-    dateExpire.setSeconds(expireInTem);
+    //dateExpire.setSeconds(expireInTem);
 
     this._cookie.set('access_token',token,dateExpire,'/')
+    this._cookie.set('dateExpire',expiresIn)
   }
 
   private getToken():string{

@@ -8,6 +8,9 @@ import { MaterialModule } from "./MaterialModule";
 import { SpinnerComponent } from './spinner/spinner.component';
 import { NavbarComponent } from './components/dashboard/navbar/navbar.component';
 import { BodyComponent } from './components/dashboard/body/body.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { ProvidesModule } from './ProvidesMo';
 
 
 @NgModule({
@@ -19,13 +22,16 @@ import { BodyComponent } from './components/dashboard/body/body.component';
   ],
   //entryComponents:[LoginComponent],
   imports: [
+    CommonModule,
     BrowserModule,
     RouterModule,
     MaterialModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ProvidesModule.forRoot()
   ],
-  exports:[NavbarComponent, BodyComponent],
+  exports:[HttpClientModule, CommonModule, BrowserAnimationsModule, NavbarComponent, BodyComponent],
   providers: [
     //{provide:HTTP_INTERCEPTORS, useClass : InterceptorService}
   ],

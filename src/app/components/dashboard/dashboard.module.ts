@@ -23,10 +23,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
    // BodyComponent
   ],
   imports: [
-    CommonModule,
-    //DashboardRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
+    //CommonModule,
+    DashboardRoutingModule,
+   // BrowserAnimationsModule,
+    //HttpClientModule,
     MaterialModule,
     ReactiveFormsModule,
     ProvidesModule.forRoot()
