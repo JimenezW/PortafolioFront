@@ -1,5 +1,6 @@
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from "@angular/core";
+import { UrlInterceptorService } from "./services/interceptors/url.interceptor-service";
 import { InterceptorService } from "./services/spinner/interceptor.service";
 
 @NgModule({
@@ -20,6 +21,11 @@ import { InterceptorService } from "./services/spinner/interceptor.service";
         {
           provide: HTTP_INTERCEPTORS,
           useClass: InterceptorService,
+          multi: true
+        },
+        {
+          provide:HTTP_INTERCEPTORS,
+          useClass: UrlInterceptorService,
           multi: true
         }
       ]

@@ -15,9 +15,23 @@ export const navbarData : INavbarData[] = [
         subMenu : true,
         items:[
             {
-                routeLink:'/cliente',
-                icon:'fad fa-user-alt',
+                routeLink:'adm/cliente',
+                icon:'fad fa-clipboard-user',
                 label:'Cliente',
+                subMenu : false,
+                items:[]
+            },
+            {
+                routeLink:'adm/empleados',
+                icon:'fad fa-users-cog',
+                label:'Empleados',
+                subMenu : false,
+                items:[]
+            },
+            {
+                routeLink:'adm/users',
+                icon:'fad fa-users-cog',
+                label:'Usuarios',
                 subMenu : false,
                 items:[]
             }
@@ -32,14 +46,14 @@ export const navbarData : INavbarData[] = [
             {
                 routeLink:'',
                 icon:'fad fa-wallet',
-                label:'Facturación 2',
+                label:'Generar',
                 subMenu : false,
                 items:[]
             },
             {
                 routeLink:'',
                 icon:'fad fa-wallet',
-                label:'Facturación 3',
+                label:'Consulta',
                 subMenu : false,
                 items:[ ]
             }
@@ -49,15 +63,52 @@ export const navbarData : INavbarData[] = [
         routeLink:'',
         icon:'fad fa-badge-dollar',
         label:'Ventas',
-        subMenu : false,
-        items:[]
+        subMenu : true,
+        items:[
+            {
+                routeLink:'',
+                icon:'fad fa-wallet',
+                label:'Productos',
+                subMenu : false,
+                items:[]
+            },
+            {
+                routeLink:'',
+                icon:'fad fa-wallet',
+                label:'Carrito',
+                subMenu : false,
+                items:[ ]
+            }
+        ]
     },
     {
         routeLink:'',
         icon:'fad fa-th-list',
         label:'Catalogos',
-        subMenu : false,
-        items:[  ]
+        subMenu : true,
+        items:[
+            {
+                routeLink:'',
+                icon:'fad fa-wallet',
+                label:'Estados',
+                subMenu : false,
+                items:[]
+            },
+            {
+                routeLink:'',
+                icon:'fad fa-wallet',
+                label:'Municipios',
+                subMenu : false,
+                items:[ ]
+            },
+            {
+                routeLink:'',
+                icon:'fad fa-wallet',
+                label:'Localidades',
+                subMenu : false,
+                items:[]
+            }
+          ]
     }
     
 ];
