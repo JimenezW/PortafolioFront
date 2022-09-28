@@ -1,9 +1,12 @@
-export const navbarData = [
+import { INavbarData } from "./helper";
+
+export const navbarData : INavbarData[] = [
     {
         routeLink:'/dashboard',
         icon:'fad fa-home',
         label:'Dashboard',
-        subMenu : false
+        subMenu : false,
+        items:[]
     },
     {
         routeLink:'',
@@ -12,10 +15,11 @@ export const navbarData = [
         subMenu : true,
         items:[
             {
-                routeLink:'',
+                routeLink:'/cliente',
                 icon:'fad fa-user-alt',
                 label:'Cliente',
-                subMenu : false
+                subMenu : false,
+                items:[]
             }
         ]
     },
@@ -23,19 +27,37 @@ export const navbarData = [
         routeLink:'',
         icon:'fad fa-wallet',
         label:'Facturación',
-        subMenu : false
+        subMenu : true,
+        items:[
+            {
+                routeLink:'',
+                icon:'fad fa-wallet',
+                label:'Facturación 2',
+                subMenu : false,
+                items:[]
+            },
+            {
+                routeLink:'',
+                icon:'fad fa-wallet',
+                label:'Facturación 3',
+                subMenu : false,
+                items:[ ]
+            }
+        ]
     },
     {
         routeLink:'',
         icon:'fad fa-badge-dollar',
         label:'Ventas',
-        subMenu : false
+        subMenu : false,
+        items:[]
     },
     {
         routeLink:'',
         icon:'fad fa-th-list',
         label:'Catalogos',
-        subMenu : true
+        subMenu : false,
+        items:[  ]
     }
     
 ];

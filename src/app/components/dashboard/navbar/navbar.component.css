@@ -57,7 +57,7 @@
   margin: 0;
   flex-direction: column;
   align-items: center;
-  height: calc(100% - 3.65rem);
+  /*height: calc(100% - 3.65rem);*/
   cursor: pointer;
 }
 
@@ -87,9 +87,18 @@
 .sidenav-nav .sidenav-nav-item .sidenav-nav-link .sidenav-link-text {
   margin-left: 1.5rem;
 }
-
+/*
 .sidenav-nav .sidenav-nav-item:hover .sidenav-nav-link {
   background-color: #fff;
+  color: #000;
+}
+*/
+.sidenav-nav .sidenav-nav-item .sidenav-nav-link:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.sidenav-nav .sidenav-nav-item .sidenav-nav-link:hover .menu-collapse-icon  {
   color: #000;
 }
 
@@ -102,41 +111,88 @@
 .active .sidenav-link-text {
   color: #000;
 }
-
-/* You can add global styles to this file, and also import other style files 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
-@import '~@angular/cdk/overlay-prebuilt.css';
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.active .menu-collapse-icon {
+  color: #000;
 }
 
-body {
-    position: relative;
-    font-family: 'Roboto', sans-serif;
-    background: #f4f7fa;
+.menu-collapse-icon {
+  font-size: 25px;
+  width: 2rem;
+  min-width: 2rem;
+  margin: auto 0.5rem auto auto;
+  text-align: center;
+  color: #f3f3f3;
 }
 
-.card {
-    display: flex;
-    flex-direction: column;
-    border-radius: .5rem;
-    background-color: #fff;
-    margin: 1.25rem 0 1.25rem 0;
-    box-shadow: 0 .25rem .5rem #e6edef;
-    color: #495057;
-
-    
-}
-.card .card-head {
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid #edf1f7;
-  font-size: 1rem;
-  font-weight: 600;
+.sublevel-nav {
+  list-style: none;
+  margin-left: 10px;
 }
 
-.card .card-body {
-  padding: 1rem 1.5rem; 
+.sublevel-nav .sublevel-nav-item .sublevel-nav-link {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  color: #898989;
+  text-decoration: none;
+  border-radius: all .3s ease;
+}
+
+.sublevel-nav .sublevel-nav-item .sublevel-nav-link .sublevel-link-icon {
+  font-size: 4px;
+  width: 2rem;
+  min-width: 2rem;
+  margin: 0 0.5rem;
+  text-align: center;
+}
+
+.sublevel-nav .sublevel-nav-item .sublevel-nav-link .sublevel-link-text {
+  margin-left: 0.8rem;
+}
+
+.sublevel-nav .sublevel-nav-item  .sublevel-nav-link:hover {
+  color: #f3f3f3;
+}
+
+/*
+'fad fa-angle-right' : 'fad fa-angle-down'
+*/
+
+div.sidenav > div.scrollwrap {
+  overflow-y: auto;
+  /*visibility: hidden;*/
+  height: 650px;
+}
+/*
+div.sidenav > div.scrollwrap :hover {
+  visibility: visible;
+}
+
+div.sidenav > div.scrollwrap :focus{
+  visibility: visible;
 }*/
+
+.scrollwrap_delayed {
+  transition: visibility 0.5s 0.2s;
+}
+
+.scrollwrap_delayed:hover {
+  transition: visibility 0.2s 0.2s;
+  
+}
+.scrollwrap::-webkit-scrollbar{
+  width: 10px;
+}
+
+.scrollwrap::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollwrap::-webkit-scrollbar-thumb {
+  background-color: #556268;
+  border-radius:20px;
+}
+.scrollwrap {
+  scrollbar-width: thin;
+  scrollbar-color: #556268 transparent;
+}

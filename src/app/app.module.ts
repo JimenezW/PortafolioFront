@@ -11,6 +11,7 @@ import { BodyComponent } from './components/dashboard/body/body.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ProvidesModule } from './ProvidesMo';
+import { SublevelMenuComponent } from './components/dashboard/navbar/sublevel-menu/sublevel-menu.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ProvidesModule } from './ProvidesMo';
     AppComponent,
     NavbarComponent,
     SpinnerComponent,
-    BodyComponent
+    BodyComponent,
+    SublevelMenuComponent,
   ],
   //entryComponents:[LoginComponent],
   imports: [
