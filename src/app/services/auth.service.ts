@@ -43,9 +43,10 @@ export class AuthService {
     );
   }
 
-  logout(){
+  logout():void{
     this.token='';
-    localStorage.clear();
+    this._cookie.deleteAll();
+    
   }
 
   private saveToken(token:string, expiresIn:string):void{

@@ -102,6 +102,7 @@
   color: #000;
 }
 
+
 .active {
   background-color: #fff;
 }
@@ -161,7 +162,7 @@
 div.sidenav > div.scrollwrap {
   overflow-y: auto;
   /*visibility: hidden;*/
-  height: 650px;
+  height: 595px;
 }
 /*
 div.sidenav > div.scrollwrap :hover {
@@ -195,4 +196,20 @@ div.sidenav > div.scrollwrap :focus{
 .scrollwrap {
   scrollbar-width: thin;
   scrollbar-color: #556268 transparent;
+}
+
+.sidenav-nav .sidenav-end {
+  display: flex;
+  align-items: center;
+  padding: 0.938rem 0.938rem 0.938rem;
+  width: 100%;
+
+}
+
+.sidenav-nav .sidenav-end .sing-out{
+  margin-left: 1.5rem;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+
 }

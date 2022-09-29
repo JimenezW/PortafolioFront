@@ -13,7 +13,7 @@ export class InterceptorService implements HttpInterceptor{
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log('Hola interceptor')
+        this.spinnerService.isLoading.next(true)
         return next.handle(req).pipe(
             finalize(()=> this.spinnerService.isLoading.next(false))
         );

@@ -1,5 +1,7 @@
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, Output, EventEmitter, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { INavbarData } from './helper';
 //import { EventEmitter } from 'stream';
 import { navbarData } from './nav-data';
@@ -46,6 +48,11 @@ export class NavbarComponent implements OnInit {
   multiple:boolean = false;
   screenWidth = 0;
 
+
+constructor(private authService : AuthService,private _router : Router,){
+
+}
+
   @Output() onToggleSideNav : EventEmitter<SideNavToggle> = new EventEmitter();
 
   @HostListener('window:resize',['$event'])
@@ -80,6 +87,12 @@ export class NavbarComponent implements OnInit {
     }
     item.expanded = !item.expanded;
 
+  }
+
+  singOut():void{
+    this.authService.logout();
+    this._router.navigateByUrl('/');
+    
   }
 
 }

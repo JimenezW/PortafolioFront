@@ -1,1 +1,114 @@
-<p>cliente works!</p>
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <h1>Clientes</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container-sm">
+        <div class="row">
+            <div class="col-10 mx-auto">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-head">Crear cliente</h5>
+                        <div class="container">
+                            <form  [formGroup]="ClientForm">
+                                <p>Información general</p>
+                                <mat-divider></mat-divider>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Nombre</mat-label>
+                                    <input matInput placeholder="Nombre" formControlName="name">
+                                    <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Apellido paterno</mat-label>
+                                    <input matInput placeholder="Apellido paterno" formControlName="apellidoP">
+                                    <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Apellido materno</mat-label>
+                                    <input matInput placeholder="Apellido materno" formControlName="apellidoM">
+                                    <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Edad</mat-label>
+                                    <input matInput placeholder="Edad" formControlName="edad">
+                                    <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                                </mat-form-field>
+                                <br/>
+                                <p>Domicilio</p>
+                                <mat-divider></mat-divider>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Código postal</mat-label>
+                                    <input matInput placeholder="Código postal" formControlName="codigoPostal">
+                                    <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Calle</mat-label>
+                                    <input matInput placeholder="Calle" formControlName="calle">
+                                    <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Número Int.</mat-label>
+                                    <input matInput placeholder="Número Int." formControlName="numInt">
+                                    <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Número Ext.</mat-label>
+                                    <input matInput placeholder="Número Ext." formControlName="numExt">
+                                    <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                                </mat-form-field>
+                                
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Descripción</mat-label>
+                                    <input matInput placeholder="Descripción" formControlName="descripcion">
+                                    <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                                </mat-form-field>
+
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Descripción</mat-label>
+                                    <input matInput placeholder="Descripción" formControlName="descripcion">
+                                    <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                                </mat-form-field>
+
+                               <mat-form-field appearance="fill">
+                                    <mat-label>Localdiad</mat-label>
+                                    <mat-select>
+                                        <mat-option>None</mat-option>
+                                        <mat-option value="option1">Option 1</mat-option>
+                                        <mat-option value="option2">Option 2</mat-option>
+                                        <mat-option value="option3">Option 3</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Municipio</mat-label>
+                                    <mat-select>
+                                        <mat-option>None</mat-option>
+                                        <mat-option value="option1">Option 1</mat-option>
+                                        <mat-option value="option2">Option 2</mat-option>
+                                        <mat-option value="option3">Option 3</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Estado</mat-label>
+                                    <mat-select>
+                                        <mat-option>None</mat-option>
+                                        <mat-option value="option1">Option 1</mat-option>
+                                        <mat-option value="option2">Option 2</mat-option>
+                                        <mat-option value="option3">Option 3</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+
