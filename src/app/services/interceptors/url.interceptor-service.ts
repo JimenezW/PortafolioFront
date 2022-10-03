@@ -13,8 +13,22 @@ export class UrlInterceptorService implements HttpInterceptor{
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        let isToken = '';
+        if(this.autService.isLoggedIn()){
+            isToken = this.autService.getToken();
+        }
+
+        if(isToken){
+            req = req.clone({
+                setHeaders: { 
+                    Authorization : `Bearer ${isToken}`,
+                    Accept :'*/*',
+                    Connetion : 'keep-alive',
+                    "Content-Type": "application/json" 
+                }
+            });
+        }
         
-        console.log('Hola interceptor')
         return next.handle(req).pipe(
            // finalize(()=> this.spinnerService.isLoading.next(false))
         );
