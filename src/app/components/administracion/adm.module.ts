@@ -18,7 +18,7 @@ import { AdmRoutingModule } from './adm.routing';
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    ProvidesModule.forRoot()
+    //ProvidesModule.forRoot()
   ],
   exports : [
     FormsModule

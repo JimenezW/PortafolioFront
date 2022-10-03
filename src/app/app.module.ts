@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ProvidesModule } from './ProvidesMo';
 import { SublevelMenuComponent } from './components/dashboard/navbar/sublevel-menu/sublevel-menu.component';
+import { JwtHelperService, JWT_OPTIONS   } from '@auth0/angular-jwt';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { SublevelMenuComponent } from './components/dashboard/navbar/sublevel-me
   ],
   exports:[HttpClientModule, CommonModule, BrowserAnimationsModule, NavbarComponent, BodyComponent],
   providers: [
-    //{provide:HTTP_INTERCEPTORS, useClass : InterceptorService}
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+        JwtHelperService
   ],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]

@@ -9,8 +9,8 @@ import { InterceptorService } from "./services/spinner/interceptor.service";
   export class ProvidesModule{
     constructor(@Optional() @SkipSelf() parentModule: ProvidesModule) {
       if (parentModule) {
-        console.warn('ProvidesModule is already loaded. Consider import it in the AppModule only if you are only' +
-          'using its providers');
+        //console.warn('ProvidesModule is already loaded. Consider import it in the AppModule only if you are only' +
+          //'using its providers');
       }
     }
   
