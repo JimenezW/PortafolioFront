@@ -48,6 +48,7 @@ export class ClienteComponent implements OnInit {
 
   ngOnInit(): void {
     this.CodigoPostasChanges();
+    //this.MunicipioChanges();
     this.GetEstados();
   }
 
@@ -55,7 +56,6 @@ export class ClienteComponent implements OnInit {
     this._EstadoService.get().subscribe((res: JsonResponceI) => {
       
       this.lstEstados = res.data;
-      console.log(this.lstEstados)
 
     });
   }
@@ -69,12 +69,26 @@ export class ClienteComponent implements OnInit {
 
         });
       }
+
+      if(selectedValue.length === 5){
+        this._municipioService.find(this.lstCodigoPostal[0].idMunicipio).subscribe((res : JsonResponceI)=>{
+
+          if(res.codeResult === 200 && res.data != null){
+            this.lstMunicipio = [res.data];
+            this.ClientForm.controls['idMunicipio'].patchValue(this.lstCodigoPostal[0].idMunicipio);
+            
+          }
+        });
+      }
     });
   }
 
   private MunicipioChanges():void{
-    this.ClientForm.get('idMunicipio')!.valueChanges.subscribe((selectedValue:string) => {
-      
+    this.ClientForm.get('idMunicipio')!.valueChanges.subscribe((selectedValue:Number) => {
+      debugger
+      /*this._municipioService.find(selectedValue).subscribe((res : JsonResponceI)=>{
+        this.lstMunicipio = [res.data];
+      });*/
     });
   }
 

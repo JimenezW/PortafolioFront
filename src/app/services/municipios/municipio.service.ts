@@ -27,6 +27,17 @@ export class MunicipioService {
     );
   }
 
+  find(idMunicipio : any):Observable<JsonResponceI>{
+    let url = `/api/municipio/${idMunicipio}`;
+
+    return this._http.get<JsonResponceI>(url).pipe(tap((res:JsonResponceI)=>{
+
+      }), catchError((err)=>{
+        return of(err);
+      })
+    );
+  }
+
    get(idEstado : Number):Observable<MunicipioI[]>{
 
     const params = new HttpParams()
