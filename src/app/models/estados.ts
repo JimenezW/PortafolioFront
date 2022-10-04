@@ -1,7 +1,8 @@
 import { ErrorResponseI } from "./error-response";
 
-export interface EstadosI extends ErrorResponseI {
-    IdEstado:number,
-    Nombre:string,
-    Abreviatura:string
+export interface EstadosI  {
+    idEstado:number,
+    nombre:string,
+    abreviatura:string,
+    catologO_KEY:string,
 }

@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EstadosService } from '../../services/estados/estados.service';
 import { ProvidesModule } from 'src/app/ProvidesMo';
 import { MunicipioService } from 'src/app/services/municipios/municipio.service';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { MunicipioService } from 'src/app/services/municipios/municipio.service'
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    //BrowserModule
     //ProvidesModule.forRoot()
   ],
   providers:[EstadosService, MunicipioService]

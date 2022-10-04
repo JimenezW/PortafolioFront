@@ -34,7 +34,7 @@ import { JwtHelperService, JWT_OPTIONS   } from '@auth0/angular-jwt';
     BrowserAnimationsModule,
     ProvidesModule.forRoot()
   ],
-  exports:[HttpClientModule, CommonModule, BrowserAnimationsModule, NavbarComponent, BodyComponent],
+  exports:[HttpClientModule, BrowserAnimationsModule, NavbarComponent, BodyComponent],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
         JwtHelperService
