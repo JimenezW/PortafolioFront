@@ -38,19 +38,15 @@ export class MunicipioService {
     );
   }
 
-   get(idEstado : Number):Observable<MunicipioI[]>{
-
+   getAllMunicipioEstado(idEstado : Number):Observable<JsonResponceI>{
+    const body = {};
     const params = new HttpParams()
     .set('idEstado', idEstado.toString())
     
-    let url = `/api/municipio/allEstado?IdEstado${idEstado}`;
-    return this._http.post<JsonResponceI>('/api/municipio/allEstado', params).pipe(tap((res:JsonResponceI)=>{
-      debugger
-        if(res.codeResult = 200){
-            return  <MunicipioI>JSON.parse(res.data[0])
-        }else{
-            return res;
-        }
+    return this._http.post<JsonResponceI>('/api/municipio/allEstado', body, {
+      params : params
+    } ).pipe(tap((res:JsonResponceI)=>{
+      
     }),catchError((err)=>{
       return of(err);
     })

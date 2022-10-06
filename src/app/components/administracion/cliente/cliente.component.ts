@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { map, Observable, startWith, of } from 'rxjs';
 import { CodigoPostalI } from 'src/app/models/codigoPostal.interface';
 import { EstadosI } from 'src/app/models/estados';
 import { JsonResponceI } from 'src/app/models/JsonResponse';
@@ -29,12 +30,14 @@ export class ClienteComponent implements OnInit {
       descripcion:new FormControl(),
       idLocalidad :new FormControl(),
       idMunicipio:new FormControl(),
-      idEstado:new FormControl()
+      idEstado:new FormControl(),
+      Colonia : new FormControl()
   });
 
   lstMunicipio : MunicipioI[] = [];
   lstEstados : EstadosI[];
   lstCodigoPostal : CodigoPostalI[] = [];
+  filteredOptions: Observable<string[]>; 
 
   constructor(private _router : Router,
     private _snackBar: MatSnackBar, 
@@ -43,13 +46,30 @@ export class ClienteComponent implements OnInit {
     private _EstadoService : EstadosService) { 
 
       this.lstEstados = [];
-      
+      this.filteredOptions = of([]);
     }
 
   ngOnInit(): void {
     this.CodigoPostasChanges();
+    this.EstadoChangues();
     //this.MunicipioChanges();
     this.GetEstados();
+
+    this.filteredOptions = this.ClientForm.controls['Colonia']!.valueChanges.pipe(
+      startWith(''),
+      map((value:string) => this._filter(value))
+
+    );
+  }
+
+  Save():void{
+    console.log(this.ClientForm.value)
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.lstCodigoPostal.filter((option:CodigoPostalI) => option.codigo.toString().toLowerCase().includes(filterValue)).map(x=> x.codigo +' - '+x.name);
   }
 
   private GetEstados():void{
@@ -76,9 +96,26 @@ export class ClienteComponent implements OnInit {
           if(res.codeResult === 200 && res.data != null){
             this.lstMunicipio = [res.data];
             this.ClientForm.controls['idMunicipio'].patchValue(this.lstCodigoPostal[0].idMunicipio);
+            this.ClientForm.controls['idEstado'].setValue(this.lstMunicipio[0].idEstado);
             
           }
         });
+      }
+    });
+  }
+
+  private EstadoChangues() : void {
+    this.ClientForm.get('idEstado')!.valueChanges.subscribe((selectedValue : number) => {
+      if((this.lstMunicipio.length === 0 || this.lstMunicipio.length > 1) || (this.lstMunicipio[0].idMunicipio != undefined && this.lstMunicipio[0].idEstado != selectedValue)){
+        this.AllMunicipioEstado(selectedValue);
+      }
+    });
+  }
+
+  private AllMunicipioEstado(IdEstado : number) : void {
+    this._municipioService.getAllMunicipioEstado(IdEstado).subscribe((res: JsonResponceI)=>{
+      if(res.codeResult === 200 && res.data.length > 0){
+        this.lstMunicipio = res.data;
       }
     });
   }

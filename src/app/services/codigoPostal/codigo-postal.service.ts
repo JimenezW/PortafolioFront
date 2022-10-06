@@ -23,7 +23,6 @@ export class CodigoPostalService {
       Nombre : Nombre
     };
     
-    let url = `/api/CodigoPostal/Filtrar?idCodigoPostal=${idCodigoPostal}&idMunicipio=${idMunicipio}&Codigo=${CodigoPostal}&Nombre=${Nombre}`    
     return this._http.post<JsonResponceI>('/api/CodigoPostal/Filtrar', data).pipe(tap((res:JsonResponceI)=>{
         if(res.codeResult = 200){
             return res.data

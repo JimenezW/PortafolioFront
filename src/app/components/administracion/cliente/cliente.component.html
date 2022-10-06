@@ -16,86 +16,117 @@
                             <form  [formGroup]="ClientForm">
                                 <p>Información general</p>
                                 <mat-divider></mat-divider>
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Nombre</mat-label>
-                                    <input matInput placeholder="Nombre" formControlName="name">
-                                    <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
-                                </mat-form-field>
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Apellido paterno</mat-label>
-                                    <input matInput placeholder="Apellido paterno" formControlName="apellidoP">
-                                    <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
-                                </mat-form-field>
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Apellido materno</mat-label>
-                                    <input matInput placeholder="Apellido materno" formControlName="apellidoM">
-                                    <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
-                                </mat-form-field>
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Edad</mat-label>
-                                    <input matInput placeholder="Edad" formControlName="edad">
-                                    <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
-                                </mat-form-field>
-                                <br/>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <mat-form-field appearance="fill" class="">
+                                            <mat-label>Nombre</mat-label>
+                                            <input matInput placeholder="Nombre" formControlName="name">
+                                            <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Apellido paterno</mat-label>
+                                            <input matInput placeholder="Apellido paterno" formControlName="apellidoP">
+                                            <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Apellido materno</mat-label>
+                                            <input matInput placeholder="Apellido materno" formControlName="apellidoM">
+                                            <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Edad</mat-label>
+                                            <input matInput placeholder="Edad" formControlName="edad">
+                                            <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                
                                 <p>Domicilio</p>
                                 <mat-divider></mat-divider>
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Código postal</mat-label>
-                                    <input matInput placeholder="Código postal" formControlName="codigoPostal">
-                                    <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
-                                </mat-form-field>
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Calle</mat-label>
-                                    <input matInput placeholder="Calle" formControlName="calle">
-                                    <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
-                                </mat-form-field>
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Número Int.</mat-label>
-                                    <input matInput placeholder="Número Int." formControlName="numInt">
-                                    <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
-                                </mat-form-field>
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Número Ext.</mat-label>
-                                    <input matInput placeholder="Número Ext." formControlName="numExt">
-                                    <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
-                                </mat-form-field>
-                                
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Descripción</mat-label>
-                                    <input matInput placeholder="Descripción" formControlName="descripcion">
-                                    <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
-                                </mat-form-field>
-
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Descripción</mat-label>
-                                    <input matInput placeholder="Descripción" formControlName="descripcion">
-                                    <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
-                                </mat-form-field>
-
-                               <mat-form-field appearance="fill">
-                                    <mat-label>Localdiad</mat-label>
-                                    <mat-select>
-                                        <mat-option disabled="">Seleccione...</mat-option>
-                                        
-                                    </mat-select>
-                                </mat-form-field>
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Municipio</mat-label>
-                                    <mat-select formControlName="idMunicipio">
-                                        <mat-option disabled="">Seleccione...</mat-option>
-                                        <mat-option [value]="data.idMunicipio" *ngFor="let data of lstMunicipio">{{data.nombre}}</mat-option>
-                                    </mat-select> 
-                                </mat-form-field>
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Estado</mat-label>
-                                    <mat-select formControlName="idEstado">
-                                        <mat-option disabled="">Seleccione...</mat-option>
-                                        <mat-option [value]="data.idEstado" *ngFor="let data of lstEstados">{{data.nombre}}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Código postal</mat-label>
+                                            <input 
+                                                type="text"
+                                                matInput 
+                                                placeholder="Código postal" 
+                                                formControlName="codigoPostal">
+                                            <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <mat-form-field class="example-full-width" appearance="fill">
+                                            <mat-label>Colonia</mat-label>
+                                            <input type="text"
+                                                   placeholder="Pick one"
+                                                   aria-label="Colonia"
+                                                   matInput
+                                                   formControlName="Colonia"
+                                                   [matAutocomplete]="auto">
+                                            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                                {{option}}
+                                              </mat-option>
+                                            </mat-autocomplete>
+                                          </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Calle</mat-label>
+                                            <input matInput placeholder="Calle" formControlName="calle">
+                                            <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Número Int.</mat-label>
+                                            <input matInput placeholder="Número Int." formControlName="numInt">
+                                            <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Número Ext.</mat-label>
+                                            <input matInput placeholder="Número Ext." formControlName="numExt">
+                                            <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-8">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Descripción</mat-label>
+                                            <input matInput placeholder="Descripción" formControlName="descripcion">
+                                            <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Municipio</mat-label>
+                                            <mat-select formControlName="idMunicipio">
+                                                <mat-option disabled="">Seleccione...</mat-option>
+                                                <mat-option [value]="data.idMunicipio" *ngFor="let data of lstMunicipio">{{data.nombre}}</mat-option>
+                                            </mat-select> 
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Estado</mat-label>
+                                            <mat-select formControlName="idEstado">
+                                                <mat-option disabled="">Seleccione...</mat-option>
+                                                <mat-option [value]="data.idEstado" *ngFor="let data of lstEstados">{{data.nombre}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
                             </form>
                         </div>
-                        <!--<div *ngFor="let data of lstEstados">{{data.nombre}}</div>-->
+                        <button class="btn btn-primary" (click)="Save()">Guardar</button>
                     </div>
                 </div>
                 
