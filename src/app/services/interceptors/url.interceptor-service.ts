@@ -1,19 +1,33 @@
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from "@angular/common/http";
+import { HttpErrorResponse,
+    HttpEvent,
+    HttpHandler,
+    HttpInterceptor,
+    HttpRequest
+ } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
-import { Observable, finalize } from "rxjs";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { 
+    Observable, 
+    throwError } from "rxjs";
+import { 
+    catchError } from 'rxjs/operators';
 import { AuthService } from "../auth.service";
+import { MessageLogin } from '../../globalsConst/message.login'
 
 
 @Injectable()
 
 export class UrlInterceptorService implements HttpInterceptor{
-    
-    constructor(private autService : AuthService, private router:Router){
+
+    constructor(private autService : AuthService,
+        private _snackBar: MatSnackBar){
     }
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        let isToken = '';
+    intercept(
+        request: HttpRequest<any>,
+        next: HttpHandler
+      ): Observable<HttpEvent<any>> {
+       /* let isToken = '';
         if(this.autService.isLoggedIn()){
             isToken = this.autService.getToken();
         }
@@ -22,18 +36,56 @@ export class UrlInterceptorService implements HttpInterceptor{
             req = req.clone({
                 setHeaders: { 
                     Authorization : `Bearer ${isToken}`,
-                    Accept :'*/*',
+                    Accept :'',
                     Connetion : 'keep-alive',
                     "Content-Type": "application/json" 
                 }
             });
         }
         
-        return next.handle(req).pipe(
-           // finalize(()=> this.spinnerService.isLoading.next(false))
+        return next.handle(req).pipe( );*/
+
+        return next.handle(this.addAuthToken(request)).pipe(
+            catchError((requestError : HttpErrorResponse) => {
+                if(requestError && requestError.status === 401){
+                    let snackBar = this._snackBar.open(MessageLogin.expirtSession, 'Cerrar sesion', 
+                    {
+                        horizontalPosition: 'center',
+                        verticalPosition: 'top',
+                        duration:5*1000
+                    });
+
+                    snackBar.afterDismissed().subscribe(()=>{
+                        this.autService.logout();
+                    });
+                }
+                
+                return throwError(()=> new Error(requestError.message))
+            })
         );
+
     }
 
+    private addAuthToken(request:HttpRequest<any>){
+        let isToken = '';
+        if(!this.autService.isLoggedIn())
+        return request;
+        
+
+        isToken = this.autService.getToken();
+        
+        if(!isToken)
+        return request;
+
+        return request.clone({
+            setHeaders: { 
+                Authorization : `Bearer ${isToken}`,
+                Accept :'*/*',
+                Connetion : 'keep-alive',
+                "Content-Type": "application/json" 
+            }
+        });
+    }
     
 
 }

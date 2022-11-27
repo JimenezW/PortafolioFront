@@ -52,6 +52,24 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <mat-form-field appearance="fill">
+                                            <mat-label>Estado</mat-label>
+                                            <mat-select formControlName="idEstado">
+                                                <mat-option disabled="">Seleccione...</mat-option>
+                                                <mat-option [value]="data.idEstado" *ngFor="let data of lstEstados">{{data.nombre}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Municipio</mat-label>
+                                            <mat-select formControlName="idMunicipio">
+                                                <mat-option disabled="">Seleccione...</mat-option>
+                                                <mat-option [value]="data.idMunicipio" *ngFor="let data of lstMunicipio">{{data.nombre}}</mat-option>
+                                            </mat-select> 
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <mat-form-field appearance="fill">
                                             <mat-label>Código postal</mat-label>
                                             <input 
                                                 type="text"
@@ -105,24 +123,7 @@
                                             <!--<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
                                         </mat-form-field>
                                     </div>
-                                    <div class="col-sm-4">
-                                        <mat-form-field appearance="fill">
-                                            <mat-label>Municipio</mat-label>
-                                            <mat-select formControlName="idMunicipio">
-                                                <mat-option disabled="">Seleccione...</mat-option>
-                                                <mat-option [value]="data.idMunicipio" *ngFor="let data of lstMunicipio">{{data.nombre}}</mat-option>
-                                            </mat-select> 
-                                        </mat-form-field>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <mat-form-field appearance="fill">
-                                            <mat-label>Estado</mat-label>
-                                            <mat-select formControlName="idEstado">
-                                                <mat-option disabled="">Seleccione...</mat-option>
-                                                <mat-option [value]="data.idEstado" *ngFor="let data of lstEstados">{{data.nombre}}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
+                                    
                                 </div>
                             </form>
                         </div>
