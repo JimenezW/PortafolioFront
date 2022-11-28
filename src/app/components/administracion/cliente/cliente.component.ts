@@ -7,9 +7,11 @@ import { CodigoPostalI } from 'src/app/models/codigoPostal.interface';
 import { EstadosI } from 'src/app/models/estados';
 import { JsonResponceI } from 'src/app/models/JsonResponse';
 import { MunicipioI } from 'src/app/models/municipios';
+import { ClientService } from 'src/app/services/cliente/client.service';
 import { CodigoPostalService } from 'src/app/services/codigoPostal/codigo-postal.service';
 import { EstadosService } from 'src/app/services/estados/estados.service';
 import { MunicipioService } from 'src/app/services/municipios/municipio.service';
+import { ClientInterfaceI } from "../../../models/client.interface";
 
 @Component({
   selector: 'app-cliente',
@@ -31,6 +33,7 @@ export class ClienteComponent implements OnInit {
       idLocalidad :new FormControl(),
       idMunicipio:new FormControl(),
       idEstado:new FormControl(),
+      idCodigoPostal:new FormControl(),
       Colonia : new FormControl()
   });
 
@@ -38,15 +41,27 @@ export class ClienteComponent implements OnInit {
   lstEstados : EstadosI[];
   lstCodigoPostal : CodigoPostalI[] = [];
   filteredOptions: Observable<string[]>; 
+  newClient : ClientInterfaceI = {
+    idCliente : 0,
+    idPersona : 0,
+    active : false,
+    nombre : '',
+    apellidoP : '',
+    apellidoM : '',
+    edad : 0,
+    domicilio : []
+  };
 
   constructor(private _router : Router,
     private _snackBar: MatSnackBar, 
     private _municipioService : MunicipioService,
     private _CodPostalService : CodigoPostalService,
+    private _ClientService : ClientService,
     private _EstadoService : EstadosService) { 
 
       this.lstEstados = [];
       this.filteredOptions = of([]);
+      //this.newClient = new ClientInterfaceI()
     }
 
   ngOnInit(): void {
@@ -58,18 +73,48 @@ export class ClienteComponent implements OnInit {
     this.filteredOptions = this.ClientForm.controls['Colonia']!.valueChanges.pipe(
       startWith(''),
       map((value:string) => this._filter(value))
-
     );
   }
 
   Save():void{
-    console.log(this.ClientForm.value)
+
+    if(this.ClientForm.invalid)
+    return;
+
+    let FormCon = this.ClientForm.value;
+    
+    this.newClient.nombre = FormCon.name;
+    this.newClient.apellidoP = FormCon.apellidoP;
+    this.newClient.apellidoM = FormCon.apellidoM;
+    this.newClient.active = true;
+    this.newClient.edad = FormCon.edad
+    this.newClient.domicilio = [
+      {
+        idDomicilio : 0,
+        idEstado : FormCon.idEstado,
+        idMunicipio : FormCon.idMunicipio,
+        calle : FormCon.calle,
+        numInt :FormCon.numInt,
+        numExt : FormCon.numExt,
+        codigoPostal : FormCon.codigoPostal,
+        description : FormCon.descripcion,
+        Colonia : ''
+      }
+    ];
+
+    this._ClientService.save(this.newClient).subscribe();
+    
+
+  }
+
+  limpiar():void{
+    this.ClientForm.reset();
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.lstCodigoPostal.filter((option:CodigoPostalI) => option.codigo.toString().toLowerCase().includes(filterValue)).map(x=> x.codigo +' - '+x.name);
+    return this.lstCodigoPostal.filter((option:CodigoPostalI) => option.name.toString().toLowerCase().includes(filterValue)).map(x=> x.codigo +' - '+x.name);
   }
 
   private GetEstados():void{
@@ -83,13 +128,17 @@ export class ClienteComponent implements OnInit {
   private CodigoPostasChanges (): void {
     this.ClientForm.get('codigoPostal')!.valueChanges.subscribe((selectedValue:string) => {
       if(selectedValue.length >= 3 && selectedValue.length < 6){
-       
-        this._CodPostalService.get(0,0,selectedValue,'').subscribe((res:any)=>{
+        let idMunicipio = 0;
+
+        if (this.ClientForm.controls['idMunicipio'].value != null && this.ClientForm.controls['idMunicipio'].value != 0)
+        idMunicipio = this.ClientForm.controls['idMunicipio'].value;
+
+        this._CodPostalService.get(0, idMunicipio, selectedValue,'').subscribe((res:any)=>{
           this.lstCodigoPostal = res.data;
 
         });
       }
-
+/*
       if(selectedValue.length === 5){
         this._municipioService.find(this.lstCodigoPostal[0].idMunicipio).subscribe((res : JsonResponceI)=>{
 
@@ -100,7 +149,7 @@ export class ClienteComponent implements OnInit {
             
           }
         });
-      }
+      }*/
     });
   }
 

@@ -13,6 +13,7 @@ import {
     catchError } from 'rxjs/operators';
 import { AuthService } from "../auth.service";
 import { MessageLogin } from '../../globalsConst/message.login'
+import { Router } from "@angular/router";
 
 
 @Injectable()
@@ -20,7 +21,8 @@ import { MessageLogin } from '../../globalsConst/message.login'
 export class UrlInterceptorService implements HttpInterceptor{
 
     constructor(private autService : AuthService,
-        private _snackBar: MatSnackBar){
+        private _snackBar: MatSnackBar,
+        private _router : Router){
     }
 
     intercept(
@@ -51,12 +53,12 @@ export class UrlInterceptorService implements HttpInterceptor{
                     let snackBar = this._snackBar.open(MessageLogin.expirtSession, 'Cerrar sesion', 
                     {
                         horizontalPosition: 'center',
-                        verticalPosition: 'top',
-                        duration:5*1000
+                        verticalPosition: 'top'
                     });
 
                     snackBar.afterDismissed().subscribe(()=>{
                         this.autService.logout();
+                        this._router.navigateByUrl('/');
                     });
                 }
                 
