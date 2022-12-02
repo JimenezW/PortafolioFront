@@ -1,0 +1,17 @@
+<h1 mat-dialog-title style="margin: 0px;">{{ModelTemple.title}}</h1>
+<div mat-dialog-content>
+    <div class="row mt-0 mb-0 text-center">
+        <span style="font-size: 45px;" [ngStyle]="{ 'color': iconColor() }">
+            <i class="far" [ngClass]="{' fa-check-circle' : ModelTemple.type == 1, 
+                            ' fa-exclamation' : ModelTemple.type == 2, 
+                            ' fa-times-circle' : ModelTemple.type == 3 }"></i>
+        </span>
+    </div>
+    <div class="row mt-0 mb-0">
+        {{ModelTemple.title}}
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>No</button>
+    <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>
+</div>

@@ -8,8 +8,13 @@ import { AuthRoutingModule } from "./auth-ruting.module";
 import { AuthService } from "../services/auth.service";
 import { MaterialModule } from "../MaterialModule";
 import { ProvidesModule } from '../ProvidesMo';
+
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [
+    LoginComponent, 
+    RegisterComponent,
+    //MessageGenericComponnet
+  ],
   imports: [
     CommonModule,
     FormsModule,

@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
 import { UserI } from "../../models/user";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MessagueGenericService } from 'src/app/util.service/message/messageGeneric.Service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -15,12 +17,17 @@ export class LoginComponent implements OnInit {
 
   form:FormGroup;
 
+  @ViewChild('messague', { read: ViewContainerRef })
+  entry!: ViewContainerRef;
+  sub!: Subscription;
+
 
   constructor(
     private _authService : AuthService, 
     private _router : Router,
     private _fb:FormBuilder,
-    private _snackBar: MatSnackBar) {
+    private _snackBar: MatSnackBar,
+    private _messague: MessagueGenericService) {
 
       this.form = this._fb.group({
         username:['',Validators.required],
@@ -44,6 +51,10 @@ export class LoginComponent implements OnInit {
         });
       }
     });
+  }
+
+  openModal() {
+    this._messague.message('Aviso','hola');
   }
 
 }
