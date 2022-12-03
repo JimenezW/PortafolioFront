@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { map, Observable, startWith, of } from 'rxjs';
 import { CodigoPostalI } from 'src/app/models/codigoPostal.interface';
 import { EstadosI } from 'src/app/models/estados';
+import { GridColumnI } from 'src/app/models/gridColum.interface';
 import { JsonResponceI } from 'src/app/models/JsonResponse';
 import { MunicipioI } from 'src/app/models/municipios';
 import { ClientService } from 'src/app/services/cliente/client.service';
@@ -52,8 +53,14 @@ export class ClienteComponent implements OnInit {
     domicilio : []
   };
 
-  constructor(private _router : Router,
-    private _snackBar: MatSnackBar, 
+  Element_Data: GridColumnI[] = [
+    {field : 'nombre', title : 'Nombre', postion : 1, wight : 100, sortable : false},
+    {field : 'edad', title : 'Edad', postion : 2, wight : 25.03, sortable : false},
+    {field : 'descripcion', title : 'Domicilio', postion : 3, wight : 25.03, sortable : false},
+    {field : 'codigoPostal', title : 'Codigo postal', postion : 4, wight : 25.03, sortable : false},
+  ];
+
+  constructor(
     private _municipioService : MunicipioService,
     private _CodPostalService : CodigoPostalService,
     private _ClientService : ClientService,
@@ -74,6 +81,8 @@ export class ClienteComponent implements OnInit {
       startWith(''),
       map((value:string) => this._filter(value))
     );
+
+    this.consultar();
   }
 
   Save():void{
@@ -102,9 +111,15 @@ export class ClienteComponent implements OnInit {
       }
     ];
 
-    this._ClientService.save(this.newClient).subscribe();
+    this._ClientService.save(this.newClient).subscribe(response => {
+      debugger
+    });
     
 
+  }
+
+  consultar(){
+    this._ClientService.consultar(8,'','','').subscribe();
   }
 
   limpiar():void{

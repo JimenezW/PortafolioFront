@@ -14,6 +14,7 @@ import {
 import { AuthService } from "../auth.service";
 import { MessageLogin } from '../../globalsConst/message.login'
 import { Router } from "@angular/router";
+import { MessagueGenericService } from "src/app/util.service/message/messageGeneric.Service";
 
 
 @Injectable()
@@ -22,30 +23,17 @@ export class UrlInterceptorService implements HttpInterceptor{
 
     constructor(private autService : AuthService,
         private _snackBar: MatSnackBar,
-        private _router : Router){
+        private _router : Router,
+        private _messague: MessagueGenericService){
     }
 
     intercept(
         request: HttpRequest<any>,
         next: HttpHandler
       ): Observable<HttpEvent<any>> {
-       /* let isToken = '';
-        if(this.autService.isLoggedIn()){
-            isToken = this.autService.getToken();
-        }
 
-        if(isToken){
-            req = req.clone({
-                setHeaders: { 
-                    Authorization : `Bearer ${isToken}`,
-                    Accept :'',
-                    Connetion : 'keep-alive',
-                    "Content-Type": "application/json" 
-                }
-            });
-        }
-        
-        return next.handle(req).pipe( );*/
+        if(request.url === '/api/login')
+        return next.handle(request).pipe();
 
         return next.handle(this.addAuthToken(request)).pipe(
             catchError((requestError : HttpErrorResponse) => {
@@ -60,6 +48,10 @@ export class UrlInterceptorService implements HttpInterceptor{
                         this.autService.logout();
                         this._router.navigateByUrl('/');
                     });
+                }
+
+                if(requestError && requestError.status === 504){
+                    this._messague.message('Aviso', MessageLogin.ConnectError, 3)
                 }
                 
                 return throwError(()=> new Error(requestError.message))
