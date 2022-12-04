@@ -14,6 +14,7 @@ import { ProvidesModule } from './ProvidesMo';
 import { SublevelMenuComponent } from './components/dashboard/navbar/sublevel-menu/sublevel-menu.component';
 import { JwtHelperService, JWT_OPTIONS   } from '@auth0/angular-jwt';
 import { MessageTemplateComponent } from './util.service/message/component/messageTemplate.component';
+import { GridComponentComponent } from './util.service/grid/componet/grid.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MessageTemplateComponent } from './util.service/message/component/messa
     SpinnerComponent,
     BodyComponent,
     SublevelMenuComponent,
-    MessageTemplateComponent
+    MessageTemplateComponent,
+    GridComponentComponent
   ],
   //entryComponents:[LoginComponent],
   imports: [
@@ -35,7 +37,7 @@ import { MessageTemplateComponent } from './util.service/message/component/messa
     BrowserAnimationsModule,
     ProvidesModule.forRoot()
   ],
-  exports:[HttpClientModule, BrowserAnimationsModule, NavbarComponent, BodyComponent, MessageTemplateComponent],
+  exports:[HttpClientModule, BrowserAnimationsModule, NavbarComponent, BodyComponent, MessageTemplateComponent, GridComponentComponent],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
         JwtHelperService

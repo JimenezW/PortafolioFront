@@ -42,6 +42,9 @@ export class LoginComponent implements OnInit {
       }else{
         if(res != undefined && res.status != undefined && res.status == 401)
         this._messague.message('Aviso',MessageLogin.loginFaild, 3);
+
+        if(res != undefined && res.status != undefined && res.status == 504)
+        this._messague.message('Aviso',MessageLogin.ConnectError, 3);
       }
     });
   }

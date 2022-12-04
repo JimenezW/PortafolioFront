@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { Component, OnInit, Output, ViewContainerRef, ViewChild } from '@angular/core';
+import {  FormControl, FormGroup, Validators } from '@angular/forms';
 import { map, Observable, startWith, of } from 'rxjs';
 import { CodigoPostalI } from 'src/app/models/codigoPostal.interface';
 import { EstadosI } from 'src/app/models/estados';
 import { GridColumnI } from 'src/app/models/gridColum.interface';
+import { GridRowI } from 'src/app/models/gridRow.interface';
 import { JsonResponceI } from 'src/app/models/JsonResponse';
 import { MunicipioI } from 'src/app/models/municipios';
 import { ClientService } from 'src/app/services/cliente/client.service';
 import { CodigoPostalService } from 'src/app/services/codigoPostal/codigo-postal.service';
 import { EstadosService } from 'src/app/services/estados/estados.service';
 import { MunicipioService } from 'src/app/services/municipios/municipio.service';
+import { GridComponentComponent } from 'src/app/util.service/grid/componet/grid.component';
+import { GridComponentService } from 'src/app/util.service/grid/grid.component.sevice';
 import { ClientInterfaceI } from "../../../models/client.interface";
 
 @Component({
@@ -53,22 +54,27 @@ export class ClienteComponent implements OnInit {
     domicilio : []
   };
 
-  Element_Data: GridColumnI[] = [
+  @Output() Element_Data: GridColumnI[] = [
     {field : 'nombre', title : 'Nombre', postion : 1, wight : 100, sortable : false},
     {field : 'edad', title : 'Edad', postion : 2, wight : 25.03, sortable : false},
     {field : 'descripcion', title : 'Domicilio', postion : 3, wight : 25.03, sortable : false},
     {field : 'codigoPostal', title : 'Codigo postal', postion : 4, wight : 25.03, sortable : false},
   ];
 
+  _dataSource : GridRowI[] = [];
+
+  @ViewChild('grid_cliente', { static: true, read: ViewContainerRef })
+  viref!: ViewContainerRef;
+
   constructor(
     private _municipioService : MunicipioService,
     private _CodPostalService : CodigoPostalService,
     private _ClientService : ClientService,
-    private _EstadoService : EstadosService) { 
-
+    private _EstadoService : EstadosService,
+    private _gridService : GridComponentService) {
+      
       this.lstEstados = [];
       this.filteredOptions = of([]);
-      //this.newClient = new ClientInterfaceI()
     }
 
   ngOnInit(): void {
@@ -83,6 +89,10 @@ export class ClienteComponent implements OnInit {
     );
 
     this.consultar();
+
+    this._gridService.mostrarGrid(this.viref);
+    //this.viref.clear();
+    //this.viref.createComponent(GridComponentComponent)
   }
 
   Save():void{
@@ -119,7 +129,10 @@ export class ClienteComponent implements OnInit {
   }
 
   consultar(){
-    this._ClientService.consultar(8,'','','').subscribe();
+    this._ClientService.consultar(8,'','','').subscribe(res => {
+      
+      this._dataSource;
+    });
   }
 
   limpiar():void{
@@ -195,3 +208,7 @@ export class ClienteComponent implements OnInit {
 
 
 }
+function ViewChield(grid_cliente: any) {
+  throw new Error('Function not implemented.');
+}
+
