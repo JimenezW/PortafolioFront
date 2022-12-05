@@ -1,6 +1,6 @@
-import { Component, OnInit, Output, ViewContainerRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ViewChild } from '@angular/core';
 import {  FormControl, FormGroup, Validators } from '@angular/forms';
-import { map, Observable, startWith, of } from 'rxjs';
+import { Observable, startWith, of } from 'rxjs';
 import { CodigoPostalI } from 'src/app/models/codigoPostal.interface';
 import { EstadosI } from 'src/app/models/estados';
 import { GridColumnI } from 'src/app/models/gridColum.interface';
@@ -11,9 +11,9 @@ import { ClientService } from 'src/app/services/cliente/client.service';
 import { CodigoPostalService } from 'src/app/services/codigoPostal/codigo-postal.service';
 import { EstadosService } from 'src/app/services/estados/estados.service';
 import { MunicipioService } from 'src/app/services/municipios/municipio.service';
-import { GridComponentComponent } from 'src/app/util.service/grid/componet/grid.component';
 import { GridComponentService } from 'src/app/util.service/grid/grid.component.sevice';
 import { ClientInterfaceI } from "../../../models/client.interface";
+import { map } from "rxjs/operators";
 
 @Component({
   selector: 'app-cliente',
@@ -54,7 +54,7 @@ export class ClienteComponent implements OnInit {
     domicilio : []
   };
 
-  @Output() Element_Data: GridColumnI[] = [
+  Element_Data: GridColumnI[] = [
     {field : 'nombre', title : 'Nombre', postion : 1, wight : 100, sortable : false},
     {field : 'edad', title : 'Edad', postion : 2, wight : 25.03, sortable : false},
     {field : 'descripcion', title : 'Domicilio', postion : 3, wight : 25.03, sortable : false},
@@ -90,7 +90,7 @@ export class ClienteComponent implements OnInit {
 
     this.consultar();
 
-    this._gridService.mostrarGrid(this.viref);
+    this._gridService.initialize(this.viref, this.Element_Data);
     //this.viref.clear();
     //this.viref.createComponent(GridComponentComponent)
   }
@@ -129,9 +129,23 @@ export class ClienteComponent implements OnInit {
   }
 
   consultar(){
-    this._ClientService.consultar(8,'','','').subscribe(res => {
+    this._ClientService.consultar(0,'','','').subscribe(res => {
+
+      if(res.codeResult != undefined && res.codeResult == 200 && res.data.length > 0){
+          let data = res.data.map((obj : any) => {
+          return { 
+            id: obj.idCliente,
+            nombre : `${obj.nombre} ${obj.apellidoP} ${obj.apellidoM}` ,
+            descripcion : obj.descripcion,
+            codigoPostal : obj.codigoPostal,
+            edad : obj.edad
+          };
+        });
+        
+        this._gridService.loandData(data);
+
+      }
       
-      this._dataSource;
     });
   }
 
@@ -166,18 +180,7 @@ export class ClienteComponent implements OnInit {
 
         });
       }
-/*
-      if(selectedValue.length === 5){
-        this._municipioService.find(this.lstCodigoPostal[0].idMunicipio).subscribe((res : JsonResponceI)=>{
 
-          if(res.codeResult === 200 && res.data != null){
-            this.lstMunicipio = [res.data];
-            this.ClientForm.controls['idMunicipio'].patchValue(this.lstCodigoPostal[0].idMunicipio);
-            this.ClientForm.controls['idEstado'].setValue(this.lstMunicipio[0].idEstado);
-            
-          }
-        });
-      }*/
     });
   }
 

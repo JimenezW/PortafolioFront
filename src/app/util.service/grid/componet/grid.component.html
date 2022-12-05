@@ -1,3 +1,15 @@
-<div>
-    hola grid
+
+<div class="row m-0 p-0">
+    <table mat-table [dataSource]="dataSource">
+        <ng-container [matColumnDef]="column.field" *ngFor="let column of configure">
+            <th mat-header-cell *matHeaderCellDef>{{column.title}}</th>
+            <td mat-cell *matCellDef="let element">{{element[column.field]}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+    </table>
+    <mat-paginator 
+    showFirstLastButtons 
+    [pageSizeOptions]="[2, 6, 25, 100]" 
+    aria-label="Select page of users"></mat-paginator>
 </div>

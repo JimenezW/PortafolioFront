@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, of, tap } from "rxjs";
+import { catchError, Observable, of, tap } from "rxjs";
 import { ClientInterfaceI } from "src/app/models/client.interface";
 import { JsonResponceI } from "src/app/models/JsonResponse";
 
@@ -26,7 +26,7 @@ import { JsonResponceI } from "src/app/models/JsonResponse";
         );
     }
 
-    consultar(idCliente : number, nombre : string, apellidoP : string, codigoPostal : string){
+    consultar(idCliente : number, nombre : string, apellidoP : string, codigoPostal : string):Observable<JsonResponceI>{
 
         let httpParams = new HttpParams()
         .append('IdCliente', idCliente)
@@ -34,13 +34,14 @@ import { JsonResponceI } from "src/app/models/JsonResponse";
         .append('ApellidoP', apellidoP)
         .append('CodigoPostal', codigoPostal);
 
-
-        return this._http.post<JsonResponceI>('api/Client/filter',{}, {params : httpParams}).pipe(tap((res : JsonResponceI) =>{
+        return this._http.post<JsonResponceI>('api/Client/filter',{}, {params : httpParams}).pipe(tap((res:JsonResponceI)=>{
+      
             return res;
-        }),catchError((err)=>{
-          return of(err);
-        })
-        )
+          }),catchError((err)=>{
+            return of(err);
+          })
+          );
+
     }
 
 }

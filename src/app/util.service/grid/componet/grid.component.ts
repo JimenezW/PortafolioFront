@@ -1,24 +1,40 @@
-import { Component, Inject, Input } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from "@angular/core";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatTableDataSource } from "@angular/material/table";
 import { GridColumnI } from "src/app/models/gridColum.interface";
-import { GridRowI } from "src/app/models/gridRow.interface";
 
 @Component({
-    selector: 'app-grid',
-    templateUrl: './grid.component.html',
-    styleUrls: ['./grid.component.css']
-  })
-  export class GridComponentComponent {
+  selector: 'app-grid',
+  templateUrl: './grid.component.html',
+  styleUrls: ['./grid.component.css']
+})
+export class GridComponentComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
 
-    @Input() dataSource : GridRowI[] = [];
-    //@Input() configure : GridColumnI[] = [] ;
-
-    //@Input() dataSource : string = '';
-    //@Input() configure : string = '' ;
+  @Input() configure: GridColumnI[] = [];
 
 
+  dataSource = new MatTableDataSource([]);
+  columnsToDisplay: string[] = [];
 
-    constructor(){
-        
-    }
-
+  constructor(private cdr: ChangeDetectorRef) {
   }
+
+
+  ngOnInit(): void {
+    this.columnsToDisplay = this.configure.map(item => { return item.field });
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  loand(dataSource : []){
+    this.dataSource.data = dataSource;
+    this.cdr.detectChanges();
+  }
+
+
+
+}
