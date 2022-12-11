@@ -9,7 +9,7 @@ import { Page500Component } from './page500/page500.component';
 import { ButtonModule, CardModule, FormModule, GridModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 import {AuthService} from '../../services/aut/auth.service';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import {AuthService} from '../../services/aut/auth.service';
     ButtonModule,
     GridModule,
     IconModule,
-    FormModule
+    FormModule,ReactiveFormsModule
   ],
   providers:[AuthService]
 })

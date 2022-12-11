@@ -6,6 +6,7 @@ import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';
 import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
+import { AppAccesGuard } from "../app/services/guardias/app.acces.guards";
 
 const routes: Routes = [
   { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
@@ -18,7 +19,8 @@ const routes: Routes = [
     },
     children: [
       { path: 'dashboard', loadChildren: () => import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule) }
-    ]
+    ],
+    canActivate:[AppAccesGuard]
   }
 ];
  
