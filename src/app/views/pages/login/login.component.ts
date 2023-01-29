@@ -3,6 +3,7 @@ import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/aut/auth.service';
 import { Message } from "../../../globalsConst/messagesGlobals";
+import { MessageGenericService } from '../../../util.service/message/messageGeneric.Service'
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent {
   constructor(
     private _router:Router,
     private _authService : AuthService,
-    private _fb: UntypedFormBuilder
+    private _fb: UntypedFormBuilder,
+    private _messageService : MessageGenericService
     ) 
   {
     this.formLogin = this._fb.group({
@@ -37,7 +39,7 @@ export class LoginComponent {
 
         if(res != undefined && res.status != undefined && res.status == 504)
         console.log('Message.Generics.ConnectError ==> ',Message.Generics.ConnectError)
-        //this._messague.message('Aviso',MessageLogin.ConnectError, 3);
+        this._messageService.message('Aviso',Message.Generics.ConnectError, 3);
       }
     });
   }

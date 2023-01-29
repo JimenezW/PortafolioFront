@@ -1,6 +1,18 @@
-<div class="page-overlay-wrapper" *ngIf="spinnerService.isLoading | async">
-    <div class="spinner">
-        <c-spinner color="primary" size="sm" variant="grow"></c-spinner>
-    </div>
+<div class="page-overlay-wrapper" style="padding-top: calc(100vh / 2); height: 100vh"  *ngIf="spinnerService.isLoading | async">
     
+    <c-container class="align-items-center">
+        <c-row>
+          <c-col></c-col>
+          <c-col>
+            <c-col class="" style="text-align: center;">
+                <!--
+                <c-progress class="" >
+                    <c-progress-bar [animated]="true" color="info" [value]="100" variant="striped"></c-progress-bar>
+                </c-progress>-->
+                <c-spinner color="success" style="width: 50px; height: 50px;"></c-spinner>
+            </c-col>
+          </c-col>
+          <c-col ></c-col>
+        </c-row>
+      </c-container>
 </div>

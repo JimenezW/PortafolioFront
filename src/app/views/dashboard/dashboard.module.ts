@@ -19,6 +19,7 @@ import { ChartjsModule } from '@coreui/angular-chartjs';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
+import { SpinnerComponent } from 'src/app/services/spinner/component/spinner.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { DashboardComponent } from './dashboard.component';
     ButtonGroupModule,
     ChartjsModule,
     AvatarModule,
-    TableModule,
+    TableModule
+    
   ],
   declarations: [DashboardComponent]
 })

@@ -41,7 +41,12 @@ import {
   SharedModule,
   SidebarModule,
   TabsModule,
-  UtilitiesModule, SpinnerModule
+  UtilitiesModule, SpinnerModule,
+  AlertModule,
+  ModalModule,
+  PopoverModule,
+  ToastModule,
+  TooltipModule,
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
@@ -49,6 +54,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtHelperService, JWT_OPTIONS   } from '@auth0/angular-jwt';
 import { SpinnerComponent } from "../app/services/spinner/component/spinner.component";
 import { ProvidesModule } from '../app/exportGroup/ProvideModule';
+
+import { MessageTemplateComponent } from './util.service/message/component/messageTemplate.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -62,7 +69,7 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, SpinnerComponent, ...APP_CONTAINERS],
+  declarations: [AppComponent, MessageTemplateComponent, SpinnerComponent, ...APP_CONTAINERS],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -90,11 +97,17 @@ const APP_CONTAINERS = [
     BadgeModule,
     ListGroupModule,
     SpinnerModule,
+    AlertModule,
+    ModalModule,
+    PopoverModule,
+    ToastModule,
+    TooltipModule,
     CardModule,
     HttpClientModule,
+   // MaterialModule,
     ProvidesModule.forRoot()
   ],
-  exports:[HttpClientModule],
+  exports:[HttpClientModule,SpinnerComponent],
   providers: [
     {
       provide: LocationStrategy,
