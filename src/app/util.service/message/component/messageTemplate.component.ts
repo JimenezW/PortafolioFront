@@ -1,4 +1,5 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
+import { MessageGenericService } from "../messageGeneric.Service";
 
 
 export interface DialogData {
@@ -12,28 +13,25 @@ export interface DialogData {
     templateUrl: './messageTemplate.component.html'
 })
 
-export class MessageTemplateComponent  {
+export class MessageTemplateComponent implements OnInit {
+  public visible = false;
 
- //   ModelTemple : DialogData;
-
-    //icoShow = 'sucess';
-
-    constructor(
-        ) {
-           // this.ModelTemple = data;
-    }
-
-
+  constructor(private _modaService : MessageGenericService){
     
+  }
 
-    onClick(): void {
-       // this.dialogRef.close();
-    }
+  ngOnInit(): void {
+    this._modaService.aClickedEvent.subscribe((t)=>{
+      this.visible = true;
+    });
+  }
+ 
+  @Input() Titulo : string = '';
 
-    public visible = false;
+   
 
   toggleLiveDemo() {
-    this.visible = !this.visible;
+    this._modaService.$modal.emit(false);
   }
 
   handleLiveDemoChange(event: any) {

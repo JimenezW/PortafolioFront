@@ -1,7 +1,6 @@
-import {
-    Injectable,
-    ViewContainerRef,
-  } from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
+
+import {BehaviorSubject, Observable} from 'rxjs';
 
   import { MessageTemplateComponent } from './component/messageTemplate.component';
   
@@ -9,20 +8,15 @@ import {
   
   @Injectable({ providedIn: 'root' })
   export class MessageGenericService {
+
+   $modal = new EventEmitter<any>();
+
     constructor() { }
     
-    message(modalTitle: string, modalBody: string, modalType : number = 1) {
-      /*this.dialog.open(MessageTemplateComponent, {
-        width : '350px',
-        disableClose : true,
-        data : { title : modalTitle, body : modalBody, type : modalType }
-      });*/
+   aClickedEvent = new EventEmitter<string>();
+
+    AClicked(msg: string) {
+      this.aClickedEvent.emit(msg);
     }
-  
-    closeModal() {
-  
-    }
-  
-    confirm() {
-    }
+    
   }

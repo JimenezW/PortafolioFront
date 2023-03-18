@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -122,7 +122,9 @@ const APP_CONTAINERS = [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
         JwtHelperService
   ],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
+  entryComponents:[MessageTemplateComponent]
 })
 export class AppModule {
 }

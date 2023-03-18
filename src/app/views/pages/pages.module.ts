@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PagesRoutingModule } from './pages-routing.module';
@@ -10,13 +10,15 @@ import { ButtonModule, CardModule, FormModule, GridModule } from '@coreui/angula
 import { IconModule } from '@coreui/icons-angular';
 import {AuthService} from '../../services/aut/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SpinnerComponent } from 'src/app/services/spinner/component/spinner.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
     Page404Component,
-    Page500Component
+    Page500Component,
+    //SpinnerComponent
   ],
   imports: [
     CommonModule,
@@ -27,6 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     IconModule,
     FormModule,ReactiveFormsModule
   ],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA],
   providers:[AuthService]
 })
 export class PagesModule {
