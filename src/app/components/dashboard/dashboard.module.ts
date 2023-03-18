@@ -3,11 +3,12 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { MaterialModule } from 'src/app/MaterialModule';
 import { DashboardComponent } from './dashboard.component';
 import { HomeComponent } from '../home/home.component'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EstadosService } from '../../services/estados/estados.service';
 import { ProvidesModule } from 'src/app/ProvidesMo';
 import { MunicipioService } from 'src/app/services/municipios/municipio.service';
-import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { BrowserModule } from '@angular/platform-browser';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule
     //BrowserModule
     //ProvidesModule.forRoot()
   ],

@@ -1,6 +1,8 @@
-import { animate, keyframes, style, transition, trigger } from '@angular/animations';
+
+import { animate, keyframes, style, transition, trigger } from '@angular/animations/animations';
 import { Component, OnInit, Output, EventEmitter, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { AuthService } from 'src/app/services/auth.service';
 import { INavbarData } from './helper';
 //import { EventEmitter } from 'stream';
